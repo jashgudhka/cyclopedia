@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/cyclopedia/static/js/main.5ecedc0b.js",
+    "index.html": "/cyclopedia/index.html",
+    "main.5ecedc0b.js.map": "/cyclopedia/static/js/main.5ecedc0b.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.5ecedc0b.js"
+  ]
+}
