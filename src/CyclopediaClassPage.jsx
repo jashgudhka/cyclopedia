@@ -1,5 +1,6 @@
 import React from "react";
 import { getRandomUser } from "./Utility/api";
+import Instructor from "./Instructor";
 //This is a class based component. This will also contain the lifecycle methods that we will learn
 
 class CyclopediaClassPage extends React.Component {
@@ -55,14 +56,7 @@ class CyclopediaClassPage extends React.Component {
     return (
       <div>
         {this.state.instructor && (
-          <div className="p-3">
-            <span className="h4 text-success">Instructor</span>
-            <i className="bi bi-toggle-off btn btn-success btn-sm"></i>
-            <br />
-            Name: {this.state.instructor.name} <br />
-            E-mail: {this.state.instructor.email} <br />
-            Phone: {this.state.instructor.phone} <br />
-          </div>
+          <Instructor instructor={this.state.instructor} />
         )}
         <div className="p-3">
           <span className="h-4 text-success">Feedback</span>
