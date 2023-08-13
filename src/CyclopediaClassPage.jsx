@@ -51,13 +51,33 @@ class CyclopediaClassPage extends React.Component {
       return { students: 0 };
     });
   };
+  handleToggleHideInstructor = () => {
+    this.setState((prevState) => {
+      return { hideInstructor: !prevState.hideInstructor };
+    });
+  };
   render() {
     console.log("Render Component");
     return (
       <div>
-        {this.state.instructor && (
-          <Instructor instructor={this.state.instructor} />
-        )}
+        <div className="p-3">
+          <span className="h4 text-success">Instructor</span>&nbsp;
+          <i
+            className={`bi ${
+              this.state.hideInstructor
+                ? "bi-toggle-off btn-danger"
+                : "bi-toggle-on btn-success"
+            } btn btn-success btn-sm`}
+            onClick={this.handleToggleHideInstructor}
+          ></i>
+          <br />
+          {!this.state.hideInstructor ? (
+            <Instructor
+              instructor={this.state.instructor}
+              handleToggleHideInstructor={this.handleToggleHideInstructor}
+            />
+          ) : null}
+        </div>
         <div className="p-3">
           <span className="h-4 text-success">Feedback</span>
           <br />
