@@ -34,10 +34,29 @@ class CyclopediaClassPage extends React.Component {
       });
     }
   };
-  componentDidUpdate() {
+  componentDidUpdate = async (previousProps, previousState) => {
     console.log("Component updated");
     localStorage.setItem("cyclopediaState", JSON.stringify(this.state));
-  }
+    console.log("Old State - " + previousState.students);
+    console.log("New State - " + this.state.students);
+    if (previousState.students < this.state.students) {
+      const response = await getRandomUser();
+      this.setState((prevState) => {
+        return {
+          studentList: [
+            ...previousState.studentList,
+            { name: response.data.first_name + " " + response.data.last_name },
+          ],
+        };
+      });
+    } else if (previousState.students > this.state.students) {
+      this.setState((prevState) => {
+        return {
+          studentList: [],
+        };
+      });
+    }
+  };
   componentWillUnmount() {
     console.log("Component unmounted");
   }
@@ -71,7 +90,7 @@ class CyclopediaClassPage extends React.Component {
             onClick={this.handleToggleHideInstructor}
           ></i>
           <br />
-          {!this.state.hideInstructor ? (
+          {!this.state.hideInstructor && this.state.instructor ? (
             <Instructor
               instructor={this.state.instructor}
               handleToggleHideInstructor={this.handleToggleHideInstructor}
@@ -116,6 +135,13 @@ class CyclopediaClassPage extends React.Component {
           >
             Remove all students
           </button>
+          {this.state.studentList.map((student, index) => {
+            return (
+              <div className="text-white" key={index}>
+                - {student.name}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
